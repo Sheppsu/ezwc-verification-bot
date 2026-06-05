@@ -130,7 +130,13 @@ async def index(code: str = "", state: str = ""):
 async def main():
     import uvicorn
 
-    config = uvicorn.Config(app, host=os.getenv("SERVER_HOST"), port=int(os.getenv("SERVER_PORT")))
+    config = uvicorn.Config(
+        app,
+        host=os.getenv("SERVER_HOST"),
+        port=int(os.getenv("SERVER_PORT")),
+        loop=os.getenv("LOOP") or "auto",
+        workers=int(os.getenv("WORKERS") or 1)
+    )
     server = uvicorn.Server(config)
 
     await asyncio.gather(
