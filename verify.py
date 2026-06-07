@@ -110,9 +110,11 @@ async def index(code: str = "", state: str = ""):
         return HTMLResponse(b"Invalid code")
 
     if osu_user.is_restricted:
+        log.info(f"Denied discord user {discord_user_id} as {osu_user.username} ({osu_user.id}) for being restricted")
         return HTMLResponse(b"Restricted users cannot gain access")
     if osu_user.join_date >= JOIN_DATE:
-        return HTMLResponse(b"Your account is too recent to gain access")
+        log.info(f"Denied discord user {discord_user_id} as {osu_user.username} ({osu_user.id}) for being a new account")
+        return HTMLResponse(b"Your account is too new to gain access")
 
     guild = discord_client.get_guild(SERVER_ID)
     role = guild.get_role(ROLE_ID)
