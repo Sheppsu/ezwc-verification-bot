@@ -124,6 +124,8 @@ async def index(code: str = "", state: str = ""):
         log.info("Unable to change nickname, ignoring")
     await redis_client.delete(state)
 
+    log.info(f"Verified discord user {discord_user_id} as {osu_user.username} ({osu_user.id})")
+
     return HTMLResponse(b"You have been given access")
 
 
