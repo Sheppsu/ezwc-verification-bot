@@ -126,7 +126,7 @@ async def index(code: str = "", state: str = ""):
 
     log.info(f"Verified discord user {discord_user_id} as {osu_user.username} ({osu_user.id})")
 
-    return HTMLResponse(b"You have been given access")
+    return HTMLResponse(b"You have been verified. You may close this page and return to Discord.")
 
 
 async def main():
